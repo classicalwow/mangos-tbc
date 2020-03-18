@@ -89,3 +89,9 @@ cmake_install.cmake
 
 # recastnavigation directory needs exception
 !dep/recastnavigation/RecastDemo/Build/
+
+/run
+
+contrib/**/*.log
+
+/*.log

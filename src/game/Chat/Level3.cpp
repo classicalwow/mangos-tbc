@@ -3186,7 +3186,38 @@ bool ChatHandler::HandleReviveCommand(char* args)
 
 bool ChatHandler::HandleAuraCommand(char* args)
 {
-    Unit* target = getSelectedUnit();
+    Unit* target;
+    Tokens token = StrSplit(args," ");
+    if(token.size() >= 2){
+        if(token[1] == "group"){
+            Group* grp = m_session->GetPlayer()->GetGroup();
+            std::string nameLink = GetNameLink(m_session->GetPlayer());
+            if (!grp)
+            {
+                PSendSysMessage(LANG_NOT_IN_GROUP, nameLink.c_str());
+                SetSentErrorMessage(true);
+                return false;
+            }
+            for (GroupReference* itr = grp->GetFirstMember(); itr != nullptr; itr = itr->next())
+            {
+                Player* pl = itr->getSource();
+                if (!pl || !pl->GetSession())
+                    continue;
+
+                // check online security
+                if (HasLowerSecurity(pl))
+                    continue;
+                std::string str = token[0]+" "+pl->GetName();
+                HandleAuraCommand(&str[0]);
+            }
+            return true;
+        } else{
+            target = ObjectAccessor::FindPlayerByName(token[1].c_str());
+        }
+    }else{
+        target = getSelectedUnit();
+    }
+    
     if (!target)
     {
         SendSysMessage(LANG_SELECT_CHAR_OR_CREATURE);

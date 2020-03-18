@@ -382,7 +382,7 @@ bool IsIPAddress(char const* ipaddress);
 uint32 CreatePIDFile(const std::string& filename);
 
 void hexEncodeByteArray(uint8* bytes, uint32 arrayLen, std::string& result);
-
+bool is_digits(const std::string &str);
 template<typename E>
 constexpr typename std::underlying_type<E>::type AsUnderlyingType(E enumValue)
 {

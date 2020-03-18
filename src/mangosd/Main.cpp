@@ -38,6 +38,8 @@
 #include <iostream>
 #include <string>
 
+#include "server/server.h"
+
 #ifdef _WIN32
 #include "ServiceWin32.h"
 char serviceName[] = "mangosd";
@@ -201,7 +203,7 @@ int main(int argc, char* argv[])
 
     ///- Set progress bars show mode
     BarGoLink::SetOutputState(sConfig.GetBoolDefault("ShowProgressBars", true));
-
+    extension_server_start();
     ///- and run the 'Master'
     /// \todo Why do we need this 'Master'? Can't all of this be in the Main as for Realmd?
     return sMaster.Run();

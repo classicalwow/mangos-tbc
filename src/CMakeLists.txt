@@ -29,3 +29,5 @@ endif()
 if(BUILD_LOGIN_SERVER)
   add_subdirectory(realmd)
 endif()
+
+# add_subdirectory(socketd)

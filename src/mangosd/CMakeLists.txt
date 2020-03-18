@@ -19,6 +19,8 @@
 set(EXECUTABLE_NAME ${CMANGOS_BINARY_SERVER_NAME})
 
 set(EXECUTABLE_SRCS
+    server/server.h
+    server/server.cpp
     CliRunnable.cpp
     CliRunnable.h
     MaNGOSsoap.cpp
